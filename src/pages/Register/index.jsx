@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Container, Form } from "./styles";
 
@@ -12,10 +12,13 @@ import TextField from "@mui/material/TextField";
 import { MdMailOutline } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
+import Waves from "../../components/Waves";
+import ModalSuccess from "../../components/ModalSuccess";
 
-import Wave from "react-wavify";
+
 
 const Register = () => {
+  const [success, setSuccess] = useState(false);
   const schema = yup.object().shape({
     username: yup
       .string()
@@ -40,13 +43,24 @@ const Register = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const history = useHistory();
+
+
   function submit(data) {
-    history.push(`/principal/${data.username}`);
+    // history.push(`/principal/${data.username}`);
+    setSuccess(!success);
+    setTimeout(()=>{
+      history.push(`/principal/${data.username}`);
+    }, 3500);
+    console.log(success)
+    
   }
 
   return (
     <Container>
+      {success && <ModalSuccess />}
       <Form onSubmit={handleSubmit(submit)}>
+        <h1>Kenzie<strong>Form</strong></h1>
+      <h2>Registrar</h2>
         <TextField
           label="Nome"
           {...register("username")}
@@ -112,7 +126,7 @@ const Register = () => {
         />
         <input type="submit" value="Cadastrar" />
       </Form>
-      <Wave fill="#000" />
+          <Waves/>
     </Container>
   );
 };
