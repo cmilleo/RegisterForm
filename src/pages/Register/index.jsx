@@ -12,7 +12,7 @@ import TextField from "@mui/material/TextField";
 import { MdMailOutline } from "react-icons/md";
 import { IoPersonOutline } from "react-icons/io5";
 import { RiLockPasswordLine } from "react-icons/ri";
-import Waves from "../../components/Waves";
+
 import Wave from "react-wavify";
 
 const Register = () => {
